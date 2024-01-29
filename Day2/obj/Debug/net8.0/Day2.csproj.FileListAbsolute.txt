@@ -1,0 +1,14 @@
+D:\repos\advent_of_code\Day2\bin\Debug\net8.0\Day2.exe
+D:\repos\advent_of_code\Day2\bin\Debug\net8.0\Day2.deps.json
+D:\repos\advent_of_code\Day2\bin\Debug\net8.0\Day2.runtimeconfig.json
+D:\repos\advent_of_code\Day2\bin\Debug\net8.0\Day2.dll
+D:\repos\advent_of_code\Day2\bin\Debug\net8.0\Day2.pdb
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.GeneratedMSBuildEditorConfig.editorconfig
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.AssemblyInfoInputs.cache
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.AssemblyInfo.cs
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.csproj.CoreCompileInputs.cache
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.dll
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\refint\Day2.dll
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.pdb
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\Day2.genruntimeconfig.cache
+D:\repos\advent_of_code\Day2\obj\Debug\net8.0\ref\Day2.dll

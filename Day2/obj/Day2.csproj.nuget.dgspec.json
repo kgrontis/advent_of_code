@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\repos\\advent_of_code\\Day1\\Day1.csproj": {}
+    "D:\\repos\\advent_of_code\\Day2\\Day2.csproj": {}
   },
   "projects": {
-    "d:\\repos\\advent_of_code\\Day1\\Day1.csproj": {
+    "D:\\repos\\advent_of_code\\Day2\\Day2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\repos\\advent_of_code\\Day1\\Day1.csproj",
-        "projectName": "Day1",
-        "projectPath": "d:\\repos\\advent_of_code\\Day1\\Day1.csproj",
+        "projectUniqueName": "D:\\repos\\advent_of_code\\Day2\\Day2.csproj",
+        "projectName": "Day2",
+        "projectPath": "D:\\repos\\advent_of_code\\Day2\\Day2.csproj",
         "packagesPath": "C:\\Users\\grodi\\.nuget\\packages\\",
-        "outputPath": "d:\\repos\\advent_of_code\\Day1\\obj\\",
+        "outputPath": "D:\\repos\\advent_of_code\\Day2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
