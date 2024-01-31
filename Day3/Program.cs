@@ -1,8 +1,10 @@
-﻿//string[] lines = ["467..114..", "...*......", "..35..633.", "......#...", "617*......", ".....+.58.", "..592.....", "......755.", "...$.*....", ".664.598.."];
+﻿using System.Text;
+
+//string[] lines = ["467..114..", "...*......", "..35..633.", "......#...", "617*......", ".....+.58.", "..592.....", "......755.", "...$.*....", ".664.598.."];
 var lines = File.ReadAllLines("input.txt");
 
-var width = lines[0].Length;
-var height = lines.Length;
+var width = lines[1].Length;
+var height = lines[0].Length;
 char[,] chars = new char[width, height];
 
 for (int i = 0; i < width; i++)
@@ -16,9 +18,10 @@ for (int i = 0; i < width; i++)
 var currentNum = 0;
 int sum = 0;
 bool hasNeighbor = false;
-for (int i = 0; i < width; i++)
+//Part 1
+for (int i = 0; i < height; i++)
 {
-    for (int j = 0; j < height; j++)
+    for (int j = 0; j < width; j++)
     {
         var character = chars[i, j];
         if (char.IsDigit(character))
@@ -41,6 +44,26 @@ for (int i = 0; i < width; i++)
         }
     }
 }
+
+//Part 2
+sum = 0;
+for (int i = 0; i < height; i++)
+{
+    for (int j = 0; j < width; j++)
+    {
+        var character = chars[i, j];
+        if (character == '*')
+        {
+            var neighbors = FindStarsNeighbors(chars, i, j);
+            if (neighbors.Count == 2)
+            {
+                var gearRatio = neighbors[0] * neighbors[1];
+                sum += gearRatio;
+            }
+        }
+    }
+}
+
 Console.WriteLine(sum);
 
 static bool IsSpecialCharacter(char c)
@@ -95,4 +118,142 @@ bool HasNeighbor(char[,] chars, int w, int h)
         hasNeighbor = IsSpecialCharacter(downRight);
     }
     return hasNeighbor;
+}
+
+
+List<int> FindStarsNeighbors(char[,] chars, int height, int width)
+{
+    var maxIndex = chars.GetLength(0) - 1;
+    List<int> neighbors = [];
+
+    var hasNeighbor = false;
+
+    if (height > 0)
+    {
+        char up = chars[height - 1, width];
+        hasNeighbor = char.IsDigit(up);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height - 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width);
+            neighbors.Add(num);
+        }
+    }
+    if (height > 0 && width < maxIndex)
+    {
+        char upRight = chars[height - 1, width + 1];
+        hasNeighbor = char.IsDigit(upRight);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height - 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width + 1);
+            neighbors.Add(num);
+        }
+    }
+    if (width > 0)
+    {
+        char left = chars[height, width - 1];
+        hasNeighbor = char.IsDigit(left);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height, maxIndex);
+            var num = ExtractNumberAtIndex(s, width - 1);
+            neighbors.Add(num);
+        }
+    }
+    if (width < maxIndex)
+    {
+        char right = chars[height, width + 1];
+        hasNeighbor = char.IsDigit(right);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height, maxIndex);
+            var num = ExtractNumberAtIndex(s, width + 1);
+            neighbors.Add(num);
+        }
+    }
+    if (height > 0 && width > 0)
+    {
+        char upLeft = chars[height - 1, width - 1];
+        hasNeighbor = char.IsDigit(upLeft);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height - 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width - 1);
+            neighbors.Add(num);
+        }
+    }
+    if (height < maxIndex && width > 0)
+    {
+        char downLeft = chars[height + 1, width - 1];
+        hasNeighbor = char.IsDigit(downLeft);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height + 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width - 1);
+            neighbors.Add(num);
+        }
+    }
+    if (height < maxIndex)
+    {
+        char down = chars[height + 1, width];
+        hasNeighbor = char.IsDigit(down);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height + 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width);
+            neighbors.Add(num);
+        }
+    }
+    if (height < maxIndex && width < maxIndex)
+    {
+        char downRight = chars[height + 1, width + 1];
+        hasNeighbor = char.IsDigit(downRight);
+        if (hasNeighbor)
+        {
+            var s = GetRowValue(chars, height + 1, maxIndex);
+            var num = ExtractNumberAtIndex(s, width + 1);
+
+            neighbors.Add(num);
+
+        }
+    }
+    return neighbors.Distinct().ToList();
+}
+
+
+string GetRowValue(char[,] chars, int index, int width)
+{
+    StringBuilder sb = new();
+    for (int i = 0; i <= width; i++)
+    {
+        sb.Append(chars[index, i]);
+    }
+    return sb.ToString();
+}
+
+static int ExtractNumberAtIndex(string input, int index)
+{
+    if (index >= 0 && index < input.Length)
+    {
+        int startIndex = index;
+        while (startIndex >= 0 && char.IsDigit(input[startIndex]))
+        {
+            startIndex--;
+        }
+
+        int endIndex = index + 1;
+        while (endIndex < input.Length && char.IsDigit(input[endIndex]))
+        {
+            endIndex++;
+        }
+
+        if (startIndex < endIndex - 1)
+        {
+            var numAsString = input.Substring(startIndex + 1, endIndex - startIndex - 1);
+            _ = int.TryParse(numAsString, out var value);
+            return value;
+        }
+    }
+    return default;
 }
